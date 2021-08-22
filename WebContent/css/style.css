@@ -64,6 +64,18 @@ td {
 button {
     font-size: 14px;
     padding: 5px 10px;
+    border: 0; /* 枠線を消す */
+}
+
+button.link-style-btn{
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #0033cc;
+}
+button.link-style-btn:hover{
+  text-decoration: underline;
+  color: #002080;
 }
 
 #footer {

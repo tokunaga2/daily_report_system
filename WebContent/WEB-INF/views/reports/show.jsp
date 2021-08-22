@@ -41,6 +41,50 @@
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                     <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
                 </c:if>
+
+                <c:if test="${sessionScope.login_employee.id != report.employee.id}">
+                    <p><form method="POST" action="<c:url value='/FollowServlet' />">
+
+                    <input type="hidden" name="_token" value="${_token}" />
+
+
+<button type="submit">
+
+<c:choose>
+    <c:when test="${sessionScope.follow_count > 0}">
+        フォローを解除する
+    </c:when>
+    <c:otherwise>
+        従業員をフォローする
+    </c:otherwise>
+</c:choose>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</button>
+
+                    </form>
+                </c:if>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
@@ -48,5 +92,6 @@
         </c:choose>
 
         <p><a href="<c:url value="/reports/index" />">一覧に戻る</a></p>
+        <c:out value="${test}" />
     </c:param>
 </c:import>
