@@ -18,14 +18,14 @@ import utils.DBUtil;
 /**
  * Servlet implementation class othersindex
  */
-@WebServlet("/follow/index")
-public class FollowIndexServlet extends HttpServlet {
+@WebServlet("/good/index")
+public class GoodIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowIndexServlet() {
+    public GoodIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,37 +40,23 @@ public class FollowIndexServlet extends HttpServlet {
         Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
 
 
-        int page;
-        try{
-            page = Integer.parseInt(request.getParameter("page"));
-        } catch(Exception e) {
-            page = 1;
-        }
 
 
-        List<Report> reports = em.createNamedQuery("getMyFollowAllReports", Report.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(15 * (page - 1))
-                .setMaxResults(15)
-                .getResultList();
-
-
-
-        List<Employee> followers = em.createNamedQuery("getMyFollowerAllEmployees", Employee.class)
+        List<Report> reports = em.createNamedQuery("getMyGoodAllReports", Report.class)
                 .setParameter("employee", login_employee)
                 .getResultList();
 
 
-        long reports_count = (long)em.createNamedQuery("getMyFollowAllReportsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
+
+
+
+
+
 
         em.close();
 
         request.setAttribute("reports", reports);
-        request.setAttribute("followers", followers);
-        request.setAttribute("reports_count", reports_count);
-        request.setAttribute("page", page);
+
 
 
         if(request.getSession().getAttribute("flush") != null) {
@@ -78,7 +64,7 @@ public class FollowIndexServlet extends HttpServlet {
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/others/follow.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/others/good.jsp");
         rd.forward(request, response);
     }
 

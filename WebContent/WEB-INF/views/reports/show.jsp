@@ -61,30 +61,39 @@
 
 
 
+</button>
+
+                    </form>
+                </c:if>
 
 
 
+                <p><form method="POST" action="<c:url value='/GoodServlet' />">
+
+                    <input type="hidden" name="_token" value="${_token}" />
 
 
+<button type="submit">
 
-
-
-
-
-
-
-
-
-
-
-
+<c:choose>
+    <c:when test="${sessionScope.good_count > 0}">
+        いいね解除
+    </c:when>
+    <c:otherwise>
+        いいね！
+    </c:otherwise>
+</c:choose>
 
 
 
 </button>
 
                     </form>
-                </c:if>
+
+
+
+
+
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

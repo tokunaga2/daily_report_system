@@ -30,6 +30,10 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "checkMyFollowReports",
             query = "SELECT f FROM Follow AS f WHERE f.followee = :followee AND f.follower = :follower"
+        ),
+    @NamedQuery(
+            name = "getMyFollowerAllEmployees",
+            query = "SELECT e FROM Employee AS e, Follow AS f WHERE f.followee = :employee AND e = f.follower ORDER BY e.id DESC"
         )
 
 })
@@ -47,6 +51,7 @@ public class Follow {
     @ManyToOne
     @JoinColumn(name = "follower_id", nullable = false)
     private Employee follower;
+
 
     public Integer getId() {
         return id;

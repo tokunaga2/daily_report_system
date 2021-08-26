@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Follow;
+import models.Good;
 import utils.DBUtil;
 
 /**
  * Servlet implementation class FollowServlet
  */
-@WebServlet("/FollowServlet")
-public class FollowServlet extends HttpServlet {
+@WebServlet("/GoodServlet")
+public class GoodServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowServlet() {
+    public GoodServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,17 +45,17 @@ public class FollowServlet extends HttpServlet {
 
 
 
-            Follow f = new Follow();
+            Good g = new Good();
 
-            f = (Follow)request.getSession().getAttribute("f");
+            g = (Good)request.getSession().getAttribute("g");
 
-           long follow_count =(long)request.getSession().getAttribute("follow_count");
+           long good_count =(long)request.getSession().getAttribute("good_count");
 
-           if(follow_count > 0) {
+           if(good_count > 0) {
 
-            Follow e = em.createNamedQuery("checkMyFollowReports", Follow.class)
-                    .setParameter("follower", f.getFollower())
-                    .setParameter("followee", f.getFollowee())
+            Good e = em.createNamedQuery("checkGoodReports", Good.class)
+                    .setParameter("employee", g.getGoodemployee())
+                    .setParameter("report", g.getGoodreport())
             .getSingleResult();
 
 
@@ -68,19 +68,19 @@ public class FollowServlet extends HttpServlet {
             em.getTransaction().commit();
             em.close();
 
-            request.getSession().setAttribute("flush", "フォロー解除しました。");
+            request.getSession().setAttribute("flush", "いいね解除しました。");
 
             response.sendRedirect(request.getContextPath() + "/reports/index");
 
            } else {
 
             em.getTransaction().begin();
-            em.persist(f);
+            em.persist(g);
             em.getTransaction().commit();
             em.close();
 
 
-            request.getSession().setAttribute("flush", "フォローしました。");
+            request.getSession().setAttribute("flush", "いいねしました。");
 
             response.sendRedirect(request.getContextPath() + "/reports/index");
             }

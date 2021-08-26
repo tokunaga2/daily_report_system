@@ -18,6 +18,10 @@ import javax.persistence.Table;
 @Table(name = "reports")
 @NamedQueries({
     @NamedQuery(
+            name = "getSearchReports",
+            query = "SELECT r FROM Report AS r  WHERE r.content LIKE :word OR r.title LIKE :word OR r.employee.name LIKE :word  ORDER BY r.id DESC"
+        ),
+    @NamedQuery(
         name = "getAllReports",
         query = "SELECT r FROM Report AS r ORDER BY r.id DESC"
     ),

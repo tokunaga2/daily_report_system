@@ -19,8 +19,25 @@
                         </c:if>
                         <a href="<c:url value='/reports/index' />">日報管理</a>&nbsp;
                         <a href="<c:url value='/follow/index' />">フォロー</a>&nbsp;
+                        <a href="<c:url value='/good/index' />">いいね</a>&nbsp;
+
+ <form style="display: inline" method="POST" action="<c:url value='/search' />">
+                        <input type="text" name="word" size="5" />
+                        <input type="hidden" name="_token" value="${_token}" />
+                        <button type="submit">日報検索</button>
+                        </form>
+
+
+
+
                     </c:if>
                 </div>
+
+
+
+
+
+
                 <c:if test="${sessionScope.login_employee != null}">
                     <div id="employee_name">
                         <c:out value="${sessionScope.login_employee.name}" />&nbsp;さん&nbsp;&nbsp;&nbsp;
