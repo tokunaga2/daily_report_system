@@ -23,7 +23,6 @@
 
  <form style="display: inline" method="POST" action="<c:url value='/search' />">
                         <input type="text" name="word" size="5" />
-                        <input type="hidden" name="_token" value="${_token}" />
                         <button type="submit">日報検索</button>
                         </form>
 
