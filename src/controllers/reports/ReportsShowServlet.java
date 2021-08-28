@@ -1,6 +1,7 @@
 package controllers.reports;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -83,6 +84,14 @@ public class ReportsShowServlet extends HttpServlet {
         request.getSession().setAttribute("g",g );
 
 
+
+        List<Employee> employees = em.createNamedQuery("getGoodAllEmployees", Employee.class)
+                .setParameter("report", r)
+                .getResultList();
+
+
+
+        request.setAttribute("employees",employees );
 
 
 

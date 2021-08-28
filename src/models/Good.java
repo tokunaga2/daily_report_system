@@ -19,6 +19,14 @@ import javax.persistence.Table;
             name = "getMyGoodAllReports",
             query = "SELECT r FROM Report AS r , Good AS g WHERE g.goodemployee = :employee AND g.goodreport = r ORDER BY r.id DESC"
         ),
+    @NamedQuery(
+            name = "getMyGooderAllReports",
+            query = "SELECT r FROM Report AS r , Good AS g WHERE g.goodreport.employee = :employee AND g.goodreport = r  ORDER BY r.id DESC"
+        ),
+    @NamedQuery(
+            name = "getGoodAllEmployees",
+            query = "SELECT e FROM Employee AS e , Good AS g WHERE g.goodreport = :report AND g.goodemployee = e ORDER BY e.id DESC"
+        ),
 
     @NamedQuery(
             name = "checkGoodReports",

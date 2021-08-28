@@ -34,6 +34,10 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getMyFollowerAllEmployees",
             query = "SELECT e FROM Employee AS e, Follow AS f WHERE f.followee = :employee AND e = f.follower ORDER BY e.id DESC"
+        ),
+    @NamedQuery(
+            name = "getMyFolloweeAllEmployees",
+            query = "SELECT e FROM Employee AS e, Follow AS f WHERE f.follower = :employee AND e = f.followee ORDER BY e.id DESC"
         )
 
 })

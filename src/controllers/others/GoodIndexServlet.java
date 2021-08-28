@@ -1,6 +1,8 @@
 package controllers.others;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -46,6 +48,13 @@ public class GoodIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getResultList();
 
+        List<Report> reports2 = em.createNamedQuery("getMyGooderAllReports", Report.class)
+                .setParameter("employee", login_employee)
+                .getResultList();
+
+        List<Report> reports3 = new ArrayList<Report>(new LinkedHashSet<>(reports2));
+
+
 
 
 
@@ -56,6 +65,7 @@ public class GoodIndexServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("reports", reports);
+        request.setAttribute("reports2", reports3);
 
 
 

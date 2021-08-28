@@ -61,6 +61,11 @@ public class FollowIndexServlet extends HttpServlet {
                 .getResultList();
 
 
+        List<Employee> followees = em.createNamedQuery("getMyFolloweeAllEmployees", Employee.class)
+                .setParameter("employee", login_employee)
+                .getResultList();
+
+
         long reports_count = (long)em.createNamedQuery("getMyFollowAllReportsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
@@ -69,6 +74,7 @@ public class FollowIndexServlet extends HttpServlet {
 
         request.setAttribute("reports", reports);
         request.setAttribute("followers", followers);
+        request.setAttribute("followees", followees);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("page", page);
 
